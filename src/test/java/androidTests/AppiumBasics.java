@@ -38,4 +38,15 @@ public class AppiumBasics extends BaseTestRunner {
         driver.findElement(AppiumBy
                 .androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"WebView\"));"));
     }
+
+    @Test
+    public void swipeTest() {
+        driver.findElement(AppiumBy.accessibilityId("Views")).click();
+        driver.findElement(AppiumBy.accessibilityId("Gallery")).click();
+        driver.findElement(AppiumBy.accessibilityId("1. Photos")).click();
+        RemoteWebElement widgetImage = (RemoteWebElement) driver.findElement(AppiumBy.xpath("(//android.widget.ImageView)[1]"));
+        Assert.assertEquals(widgetImage.getAttribute("focusable"), "true");
+        swipeAction(widgetImage, "left");
+        Assert.assertEquals(widgetImage.getAttribute("focusable"), "false");
+    }
 }
