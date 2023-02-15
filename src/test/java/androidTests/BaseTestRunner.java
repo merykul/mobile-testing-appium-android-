@@ -3,7 +3,7 @@ package androidTests;
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.testng.annotations.*;
 import java.net.MalformedURLException;
@@ -30,6 +30,17 @@ public class BaseTestRunner {
     public void longPressGesture(RemoteWebElement element) {
         driver.executeScript("mobile: longClickGesture",
                 ImmutableMap.of("elementId", (element).getId(), "duration", 2000));
+    }
+
+    public void scrollTillTheEnd() {
+        boolean canScrollMore;
+        do {
+            canScrollMore = (boolean) ((JavascriptExecutor) driver).executeScript("mobile: scrollGesture", ImmutableMap.of(
+                    "left", 100, "top", 100, "width", 200, "height", 200,
+                    "direction", "down",
+                    "percent", 3.0
+            ));
+        } while (canScrollMore);
     }
 
     @AfterMethod
