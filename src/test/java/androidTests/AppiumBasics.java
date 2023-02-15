@@ -1,6 +1,5 @@
 package androidTests;
 
-import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebElement;
@@ -22,13 +21,21 @@ public class AppiumBasics extends BaseTestRunner {
     }
 
     @Test
-    public void longPressGesture() throws InterruptedException {
+    public void longPressGesture() {
         driver.findElement(AppiumBy.accessibilityId("Views")).click();
         driver.findElement(AppiumBy.accessibilityId("Expandable Lists")).click();
         driver.findElement(AppiumBy.accessibilityId("1. Custom Adapter")).click();
-        RemoteWebElement peopleNamesButton = (RemoteWebElement) driver.findElement(By.xpath("//android.widget.TextView[@text='People Names']"));
+        RemoteWebElement peopleNamesButton = (RemoteWebElement) driver
+                .findElement(By.xpath("//android.widget.TextView[@text='People Names']"));
         longPressGesture(peopleNamesButton);
         String actualResult = driver.findElement(By.id("android:id/title")).getText();
         Assert.assertEquals(actualResult, "Sample menu");
+    }
+
+    @Test
+    public void scrollTest() {
+        driver.findElement(AppiumBy.accessibilityId("Views")).click();
+        driver.findElement(AppiumBy
+                .androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"WebView\"));"));
     }
 }
