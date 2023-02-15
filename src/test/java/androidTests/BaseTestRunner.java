@@ -6,6 +6,7 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.testng.annotations.*;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
@@ -35,16 +36,17 @@ public class BaseTestRunner {
     public void scrollTillTheEnd() {
         boolean canScrollMore;
         do {
-            canScrollMore = (boolean) ((JavascriptExecutor) driver).executeScript("mobile: scrollGesture", ImmutableMap.of(
-                    "left", 100, "top", 100, "width", 200, "height", 200,
-                    "direction", "down",
-                    "percent", 3.0
-            ));
+            canScrollMore = (boolean) ((JavascriptExecutor) driver)
+                    .executeScript("mobile: scrollGesture", ImmutableMap.of(
+                            "left", 100, "top", 100, "width", 200, "height", 200,
+                            "direction", "down",
+                            "percent", 3.0
+                    ));
         } while (canScrollMore);
     }
 
     @AfterMethod
-    public void  tearDown() {
+    public void tearDown() {
         driver.quit();
     }
 }
