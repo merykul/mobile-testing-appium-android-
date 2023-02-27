@@ -23,8 +23,6 @@ public class AppiumBasics extends BaseTestRunner {
                 .clickWiFiCheckbox()
                 .clickWiFiSettings();
 
-        DeviceRotation landScape = new DeviceRotation(0, 0, 90);
-        driver.rotate(landScape);
         String alert = driver.findElement(AppiumBy.id("android:id/alertTitle")).getText();
         Assert.assertEquals(alert, "WiFi settings");
         driver.setClipboardText("MeryWiFi");
@@ -33,6 +31,9 @@ public class AppiumBasics extends BaseTestRunner {
         driver.findElement(AppiumBy.id("android:id/button1")).click();
         driver.pressKey(new KeyEvent(AndroidKey.BACK));
         driver.pressKey(new KeyEvent(AndroidKey.HOME));
+
+//        DeviceRotation landScape = new DeviceRotation(0, 0, 90);
+//        driver.rotate(landScape);
     }
 
     @Test
