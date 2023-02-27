@@ -2,8 +2,8 @@ package androidTests;
 
 import apps_pages.EntryPage;
 import com.google.common.collect.ImmutableMap;
+import components.WiFiSettingsPopUp;
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.android.Activity;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import org.openqa.selenium.By;
@@ -15,16 +15,16 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class AppiumBasics extends BaseTestRunner {
-
     @Test
     public void wifiSettingsName() {
-        Activity activity = new Activity("d88026b u0 io.appium.android.apis", "io.appium.android.apis.preference.PreferenceDependencies");
-        driver.startActivity(activity);
+        WiFiSettingsPopUp wiFiSettingsCheck = new EntryPage(driver)
+                .clickPreferences()
+                .clickPreferenceDependencies()
+                .clickWiFiCheckbox()
+                .clickWiFiSettings();
 
-        driver.findElement(AppiumBy.id("android:id/checkbox")).click();
         DeviceRotation landScape = new DeviceRotation(0, 0, 90);
         driver.rotate(landScape);
-        driver.findElement(AppiumBy.xpath("/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.ListView/android.widget.LinearLayout[2]/android.widget.RelativeLayout/android.widget.TextView")).click();
         String alert = driver.findElement(AppiumBy.id("android:id/alertTitle")).getText();
         Assert.assertEquals(alert, "WiFi settings");
         driver.setClipboardText("MeryWiFi");
