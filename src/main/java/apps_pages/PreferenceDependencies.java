@@ -11,7 +11,7 @@ public class PreferenceDependencies extends BasePO{
     @FindBy(id = "android:id/checkbox")
     private WebElement wiFiCheckbox;
 
-    @FindBy(id = "00000000-0000-003c-ffff-ffff00000048")
+    @FindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.ListView/android.widget.LinearLayout[2]/android.widget.RelativeLayout")
     private WebElement wiFiSettings;
 
     public PreferenceDependencies(WebDriver driver) {
