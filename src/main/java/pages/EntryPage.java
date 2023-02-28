@@ -1,4 +1,4 @@
-package apps_pages;
+package pages;
 
 import base.BasePO;
 import org.openqa.selenium.WebDriver;

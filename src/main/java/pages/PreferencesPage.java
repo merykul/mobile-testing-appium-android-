@@ -1,4 +1,4 @@
-package apps_pages;
+package pages;
 
 import base.BasePO;
 import org.openqa.selenium.WebDriver;
@@ -14,8 +14,8 @@ public class PreferencesPage extends BasePO{
         super(driver);
     }
 
-    public PreferenceDependencies clickPreferenceDependencies() {
+    public PreferenceDependenciesPage clickPreferenceDependencies() {
         preferenceDependencies.click();
-        return new PreferenceDependencies(driver);
+        return new PreferenceDependenciesPage(driver);
     }
 }
