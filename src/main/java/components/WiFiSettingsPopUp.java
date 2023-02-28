@@ -1,6 +1,8 @@
 package components;
 
-import apps_pages.PreferenceDependencies;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
+import pages.PreferenceDependenciesPage;
 import base.BasePO;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +19,9 @@ public class WiFiSettingsPopUp extends BasePO{
     @FindBy(id = "android:id/button2")
     private WebElement cancelButton;
 
+    @FindBy()
+    private WebElement popUpTitle;
+
     public WiFiSettingsPopUp(WebDriver driver) {
         super(driver);
     }
@@ -26,13 +31,17 @@ public class WiFiSettingsPopUp extends BasePO{
         return this;
     }
 
-    public PreferenceDependencies clickOkButton() {
+    public PreferenceDependenciesPage clickOkButton() {
         okButton.click();
-        return new PreferenceDependencies(driver);
+        return new PreferenceDependenciesPage(driver);
     }
 
-    public PreferenceDependencies clickCancelButton() {
+    public PreferenceDependenciesPage clickCancelButton() {
         cancelButton.click();
-        return new PreferenceDependencies(driver);
+        return new PreferenceDependenciesPage(driver);
+    }
+
+    public String getPopUpTitle() {
+        return popUpTitle.getText();
     }
 }
