@@ -1,8 +1,7 @@
 package androidTests;
 
+import calculator.MainPage;
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -30,18 +29,13 @@ public class CalculatorTest {
 
     @Test
     public static void addOperation() {
-        WebElement seven = driver.findElement(By.id("com.sec.android.app.popupcalculator:id/calc_keypad_btn_07"));
-        WebElement plus = driver.findElement(By.id("com.sec.android.app.popupcalculator:id/calc_keypad_btn_add"));
-        WebElement zero = driver.findElement(By.id("com.sec.android.app.popupcalculator:id/calc_keypad_btn_00"));
-        WebElement equals = driver.findElement(By.id("com.sec.android.app.popupcalculator:id/calc_keypad_btn_equal"));
-        seven.click();
-        plus.click();
-        zero.click();
-        equals.click();
-        WebElement result = driver.findElement(By.className("android.view.ViewGroup"));
-        String res = result.getText();
-        String expectedResult = "7";
-        Assert.assertEquals(res, expectedResult);
+        String result = new MainPage(driver)
+                .clickZero()
+                .clickMultiple()
+                .clickSeven()
+                .clickEquals()
+                .getResult();
+        Assert.assertEquals(result, "0");
     }
 }
 
