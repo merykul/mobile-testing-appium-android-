@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class PreferenceDependencies extends BasePO{
+public class PreferenceDependenciesPage extends BasePO{
 
     @FindBy(id = "android:id/checkbox")
     private WebElement wiFiCheckbox;
@@ -14,11 +14,11 @@ public class PreferenceDependencies extends BasePO{
     @FindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.ListView/android.widget.LinearLayout[2]/android.widget.RelativeLayout")
     private WebElement wiFiSettings;
 
-    public PreferenceDependencies(WebDriver driver) {
+    public PreferenceDependenciesPage(WebDriver driver) {
         super(driver);
     }
 
-    public PreferenceDependencies clickWiFiCheckbox() {
+    public PreferenceDependenciesPage clickWiFiCheckbox() {
         wiFiCheckbox.click();
         return this;
     }
