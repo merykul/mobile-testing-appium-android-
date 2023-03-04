@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class PhotosPage extends BasePO{
 
-    @FindBy(id = "00000000-0000-0038-ffff-ffff00000046")
+    @FindBy(xpath = "//android.widget.ImageView[@index='0']")
     private WebElement firstPhotoWidget;
 
     @FindBy(id = "00000000-0000-0038-ffff-ffff00000047")
@@ -32,6 +32,7 @@ public class PhotosPage extends BasePO{
     }
 
     public String isFocusableFirst() {
+        sleep(2);
         return firstPhotoWidget.getAttribute("focusable");
     }
 }
