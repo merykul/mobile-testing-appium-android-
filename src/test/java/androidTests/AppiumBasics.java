@@ -12,6 +12,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.PhotosPage;
+import utils.BaseTestRunner;
 
 public class AppiumBasics extends BaseTestRunner {
     @Test
@@ -46,21 +48,20 @@ public class AppiumBasics extends BaseTestRunner {
     @Test
     public void scrollTest() {
         new EntryPage(driver)
-                .clickViews();
-        driver.findElement(AppiumBy
-                .androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"WebView\"));"));
+                .clickViews()
+                .scrollIntoView("WebView");
     }
 
     @Test
     public void swipeTest() {
-        new EntryPage(driver)
+        PhotosPage photosPage = new EntryPage(driver)
                 .clickViews()
-                .clickGallery();
-        driver.findElement(AppiumBy.accessibilityId("1. Photos")).click();
-        RemoteWebElement widgetImage = (RemoteWebElement) driver.findElement(AppiumBy.xpath("(//android.widget.ImageView)[1]"));
-        Assert.assertEquals(widgetImage.getAttribute("focusable"), "true");
-        swipeAction(widgetImage, "left");
-        Assert.assertEquals(widgetImage.getAttribute("focusable"), "false");
+                .clickGallery()
+                .clickPhotos();
+        String focusableFirst = photosPage.isFocusableFirst();
+        Assert.assertEquals(focusableFirst, "true");
+        swipeAction((RemoteWebElement) photosPage.getFirstPhotoWidget(), "left");
+        Assert.assertEquals(focusableFirst, "false");
     }
 
     @Test
