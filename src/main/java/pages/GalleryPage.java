@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class GalleryPage extends BasePO{
 
-    @FindBy(id = "00000000-0000-0037-ffff-ffff00000038")
+    @FindBy(xpath = "//android.widget.TextView[@content-desc=\"1. Photos\"]")
     private WebElement photos;
 
     public GalleryPage(WebDriver driver) {
