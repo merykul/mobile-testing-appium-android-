@@ -4,9 +4,9 @@ import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.testng.annotations.*;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
@@ -18,7 +18,8 @@ public class BaseTestRunner {
     public void configureAppium() throws MalformedURLException {
         UiAutomator2Options options = new UiAutomator2Options();
         options.setDeviceName("Samsung");
-        options.setCapability("udid", "adb-R58R62JC02R-SndPFB._adb-tls-connect._tcp");
+        options.setCapability("udid", "R58R62JC02R");
+        // udid for wireless connecting:adb-R58R62JC02R-SndPFB._adb-tls-connect._tcp
         options.setCapability("platformName", "Android");
         options.setCapability("platformVersion", "12");
         options.setApp("C://Users//User//IdeaProjects//appium_android//src//test//java//resourses//ApiDemos-debug.apk");
@@ -28,9 +29,9 @@ public class BaseTestRunner {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
-    public void longPressGesture(RemoteWebElement element) {
+    public void longPressGesture(WebElement element) {
         driver.executeScript("mobile: longClickGesture",
-                ImmutableMap.of("elementId", (element).getId(), "duration", 2000));
+                ImmutableMap.of("elementId", element, "duration", 2000));
     }
 
     public void scrollTillTheEnd() {
@@ -45,11 +46,19 @@ public class BaseTestRunner {
         } while (canScrollMore);
     }
 
-    public void swipeAction(RemoteWebElement element, String direction) {
+    public void swipeAction(WebElement element, String direction) {
         ((JavascriptExecutor) driver).executeScript("mobile: swipeGesture", ImmutableMap.of(
-                "elementId", element.getId(),
+                "elementId", element,
                 "direction", direction,
                 "percent", 0.75 ));
+    }
+
+    public void dragAction(WebElement source, int endX, int endY) {
+        ((JavascriptExecutor) driver).executeScript("mobile: dragGesture", ImmutableMap.of(
+                "elementId", source,
+                "endX", endX,
+                "endY", endY
+        ));
     }
 
     @AfterMethod
