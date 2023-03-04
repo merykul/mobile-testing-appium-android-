@@ -1,15 +1,12 @@
 package androidTests;
 
 import org.openqa.selenium.DeviceRotation;
+import pages.DragAndDropPage;
 import pages.EntryPage;
-import com.google.common.collect.ImmutableMap;
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.PhotosPage;
@@ -34,11 +31,11 @@ public class AppiumBasics extends BaseTestRunner {
 
     @Test
     public void longPressGesture() {
-        RemoteWebElement peopleNamesButton = new EntryPage(driver)
+        WebElement peopleNamesButton = new EntryPage(driver)
                 .clickViews()
                 .clickEnableLists()
                 .clickCustomerAdapter()
-                .peopleNameButtonFind();
+                .getPeopleNameButton();
 
         longPressGesture(peopleNamesButton);
         String actualResult = driver.findElement(By.id("android:id/title")).getText();
@@ -60,20 +57,17 @@ public class AppiumBasics extends BaseTestRunner {
                 .clickPhotos();
         String focusableFirst = photosPage.isFocusableFirst();
         Assert.assertEquals(focusableFirst, "true");
-        swipeAction((RemoteWebElement) photosPage.getFirstPhotoWidget(), "left");
-        Assert.assertEquals(focusableFirst, "false");
+        swipeAction(photosPage.getFirstPhotoWidget(), "left");
+        String focusableAfter = photosPage.isFocusableFirst();
+        Assert.assertEquals(focusableAfter, "false");
     }
 
     @Test
-    public void DragDropTest() throws InterruptedException {
-        new EntryPage(driver).clickViews().clickDragAndDropPage();
-        WebElement source = driver.findElement(By.id("io.appium.android.apis:id/drag_dot_1"));
-        ((JavascriptExecutor) driver).executeScript("mobile: dragGesture", ImmutableMap.of(
-                "elementId", ((RemoteWebElement) source).getId(),
-                "endX", 448,
-                "endY", 398
-        ));
-        WebElement droppedConfirm = driver.findElement(AppiumBy.id("io.appium.android.apis:id/drag_result_text"));
-        Assert.assertEquals(droppedConfirm.getText(), "Dropped!");
+    public void DragDropTest() {
+        DragAndDropPage dragAndDropPage = new EntryPage(driver)
+                .clickViews()
+                .clickDragAndDropPage();
+        dragAction(dragAndDropPage.getDragDrop1() , 448, 398);
+        Assert.assertEquals(dragAndDropPage.getDragResult().getText(), "Dropped!");
     }
 }
