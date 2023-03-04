@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePO;
+import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,5 +42,9 @@ public class ViewsPage extends BasePO{
     public WebViewPage clickWebView() {
         webView.click();
         return new WebViewPage(driver);
+    }
+
+    public void scrollIntoView(String text) {
+        driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"" + text + "\"));"));
     }
 }
