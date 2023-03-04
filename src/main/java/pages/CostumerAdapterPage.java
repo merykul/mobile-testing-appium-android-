@@ -17,9 +17,8 @@ public class CostumerAdapterPage extends BasePO{
         super(driver);
     }
 
-    public RemoteWebElement peopleNameButtonFind() {
-        peopleNames.isEnabled();
-        return new RemoteWebElement();
+    public WebElement getPeopleNameButton() {
+        return peopleNames;
     }
 
 }
