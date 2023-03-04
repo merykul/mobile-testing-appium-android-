@@ -50,10 +50,5 @@
           <artifactId>selenium-support</artifactId>
           <version>4.8.0</version>
       </dependency>
-      <dependency>
-          <groupId></groupId>
-          <artifactId></artifactId>
-          <version></version>
-      </dependency>
   </dependencies>
 </project>
